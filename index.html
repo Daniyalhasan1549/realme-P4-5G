@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Store – Realme P4 5G Flagship Killer Hub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{'ry':'#FFC800','rd':'#000000','rc':'#111111','rb':'#222222','rt':'#999999'},fontFamily:{'heading':['Oswald','sans-serif'],'body':['Inter','sans-serif']}}}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#000;color:#fff;overflow-x:hidden}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:#111}
+::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:#FFC800}
+.glow-yellow{box-shadow:0 0 30px rgba(255,200,0,.15)}
+.glow-yellow-strong{box-shadow:0 0 40px rgba(255,200,0,.3)}
+.card-hover{transition:all .3s ease}
+.card-hover:hover{border-color:#FFC800!important;transform:translateY(-4px);box-shadow:0 8px 30px rgba(255,200,0,.1)}
+.mega-menu{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.mega-menu.open{max-height:2000px}
+.pulse-glow{animation:pulseGlow 2s ease-in-out infinite}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(255,200,0,.2)}50%{box-shadow:0 0 40px rgba(255,200,0,.5)}}
+.slide-in{transform:translateX(100%);transition:transform .3s ease}
+.slide-in.open{transform:translateX(0)}
+.fade-in{opacity:0;transform:translateY(20px);transition:all .5s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.marquee{animation:scroll 30s linear infinite}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hero-gradient{background:linear-gradient(135deg,#000 0%,#1a1200 50%,#000 100%)}
+.stripe-bg{background-image:repeating-linear-gradient(-45deg,transparent,transparent 10px,rgba(255,200,0,.03) 10px,rgba(255,200,0,.03) 20px)}
+.search-dropdown{max-height:400px;overflow-y:auto}
+.toast-enter{animation:toastIn .3s ease forwards}
+@keyframes toastIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.compare-bar{background:linear-gradient(90deg,#FFC800,#FFD700,#FFC800);background-size:200% 100%;animation:shimmer 2s linear infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+</style>
+</head>
+<body>
+
+<!-- TOAST CONTAINER -->
+<div id="toastContainer" class="fixed bottom-6 right-6 z-[200] flex flex-col gap-2"></div>
+
+<!-- HEADER -->
+<header class="fixed top-0 left-0 w-full z-50 bg-black/95 backdrop-blur-md border-b border-rb">
+<div class="max-w-[1920px] mx-auto px-4 md:px-8">
+<div class="flex items-center justify-between h-16 md:h-20">
+<!-- Logo -->
+<a href="#" class="flex items-center gap-2 shrink-0">
+<div class="w-8 h-8 md:w-10 md:h-10 bg-ry rounded-lg flex items-center justify-center">
+<i class="fas fa-mobile-alt text-black text-lg md:text-xl"></i>
+</div>
+<div>
+<span class="font-heading text-lg md:text-2xl font-bold text-ry tracking-wide">MOBILE STORE</span>
+<span class="hidden md:block text-[10px] text-rt tracking-widest uppercase">Realme P4 5G Hub</span>
+</div>
+</a>
+
+<!-- Search Bar -->
+<div class="hidden md:flex flex-1 max-w-2xl mx-8 relative" id="searchWrap">
+<div class="flex w-full">
+<select id="searchCat" class="bg-rc border border-rb border-r-0 rounded-l-lg px-3 text-sm text-rt focus:outline-none focus:border-ry">
+<option value="all">All Categories</option>
+<option value="samsung">Samsung</option>
+<option value="vivo">Vivo / iQOO</option>
+<option value="oppo">Oppo</option>
+<option value="google">Google / OnePlus</option>
+<option value="xiaomi">Xiaomi / POCO</option>
+<option value="nothing">Moto / Nothing</option>
+<option value="others">Sony / Others</option>
+</select>
+<input type="text" id="searchInput" placeholder="Search 139 overpriced phones..." class="flex-1 bg-rc border border-rb px-4 py-2.5 text-sm text-white placeholder-rt focus:outline-none focus:border-ry">
+<button onclick="performSearch()" class="bg-ry text-black px-5 rounded-r-lg font-semibold text-sm hover:bg-yellow-400 transition-colors">
+<i class="fas fa-search"></i>
+</button>
+</div>
+<div id="searchDropdown" class="absolute top-full left-0 w-full bg-rc border border-rb rounded-b-lg mt-0.5 search-dropdown hidden z-50"></div>
+</div>
+
+<!-- Right Actions -->
+<div class="flex items-center gap-3 md:gap-5">
+<button onclick="toggleMobileSearch()" class="md:hidden text-white text-lg"><i class="fas fa-search"></i></button>
+<a href="#hero" class="hidden lg:flex items-center gap-2 bg-ry text-black px-4 py-2 rounded-lg font-bold text-sm hover:bg-yellow-400 transition-colors pulse-glow">
+<i class="fas fa-crown"></i> Buy Realme P4
+</a>
+<button onclick="toggleCart()" class="relative text-white hover:text-ry transition-colors">
+<i class="fas fa-shopping-cart text-xl"></i>
+<span id="cartBadge" class="absolute -top-2 -right-2 bg-ry text-black text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+</button>
+<button onclick="toggleMobileMenu()" class="md:hidden text-white text-xl"><i class="fas fa-bars" id="menuIcon"></i></button>
+</div>
+</div>
+
+<!-- Mobile Search -->
+<div id="mobileSearch" class="hidden md:hidden pb-4">
+<div class="flex">
+<input type="text" id="mobileSearchInput" placeholder="Search overpriced phones..." class="flex-1 bg-rc border border-rb px-4 py-2.5 text-sm text-white placeholder-rt rounded-l-lg focus:outline-none focus:border-ry">
+<button onclick="performMobileSearch()" class="bg-ry text-black px-4 rounded-r-lg"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</div>
+</header>
+
+<!-- CATEGORY NAV -->
+<nav class="fixed top-16 md:top-20 left-0 w-full z-40 bg-rc/95 backdrop-blur-sm border-b border-rb">
+<div class="max-w-[1920px] mx-auto px-4 md:px-8">
+<div class="flex items-center gap-1 overflow-x-auto py-2 scrollbar-hide" id="catNav">
+<button onclick="filterCategory('all')" class="cat-btn active shrink-0 px-3 md:px-4 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all bg-ry text-black" data-cat="all">
+All 139
+</button>
+<button onclick="toggleMegaMenu()" class="shrink-0 px-3 md:px-4 py-1.5 rounded-full text-xs md:text-sm font-semibold border border-ry text-ry hover:bg-ry hover:text-black transition-all md:hidden">
+<i class="fas fa-chevron-down mr-1"></i>Browse
+</button>
+</div>
+</div>
+</nav>
+
+<!-- MEGA MENU -->
+<div id="megaMenu" class="mega-menu fixed top-[7.5rem] md:top-[8.5rem] left-0 w-full z-30 bg-rc/98 backdrop-blur-md border-b border-rb">
+<div class="max-w-[1920px] mx-auto px-4 md:px-8 py-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="megaMenuContent"></div>
+<div class="mt-4 pt-4 border-t border-rb text-center">
+<button onclick="toggleMegaMenu()" class="text-ry text-sm font-semibold hover:underline">Close Menu <i class="fas fa-times ml-1"></i></button>
+</div>
+</div>
+</div>
+
+<!-- HERO SECTION -->
+<section id="hero" class="hero-gradient pt-32 md:pt-40 pb-16 md:pb-24 stripe-bg relative overflow-hidden">
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute top-20 left-10 w-72 h-72 bg-ry/5 rounded-full blur-3xl"></div>
+<div class="absolute bottom-10 right-10 w-96 h-96 bg-ry/5 rounded-full blur-3xl"></div>
+</div>
+<div class="max-w-[1920px] mx-auto px-4 md:px-8 relative">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
+<div class="order-2 lg:order-1">
+<div class="inline-flex items-center gap-2 bg-ry/10 border border-ry/30 rounded-full px-4 py-1.5 mb-6">
+<span class="w-2 h-2 bg-ry rounded-full animate-pulse"></span>
+<span class="text-ry text-xs font-semibold tracking-wider uppercase">Flagship Killer Alert</span>
+</div>
+<h1 class="font-heading text-4xl md:text-6xl lg:text-7xl font-bold uppercase leading-[0.95] tracking-tight mb-6">
+Why Pay More<br>for <span class="text-ry">Less?</span>
+</h1>
+<p class="text-xl md:text-2xl font-heading text-gray-300 mb-4">The Real Flagship Killer is Here.</p>
+<p class="text-rt text-sm md:text-base max-w-lg mb-8">Comparing the <span class="text-ry font-bold">Realme P4 5G</span> against <span class="text-white font-bold">130+ overpriced competitors</span> across 7 brands. See why they all lose.</p>
+<div class="flex flex-wrap gap-4 mb-8">
+<a href="#products" class="bg-ry text-black px-8 py-3.5 rounded-lg font-bold text-sm md:text-base hover:bg-yellow-400 transition-all pulse-glow inline-flex items-center gap-2">
+<i class="fas fa-crown"></i> See the Proof
+</a>
+<button onclick="addRealmeToCart()" class="border-2 border-ry text-ry px-8 py-3.5 rounded-lg font-bold text-sm md:text-base hover:bg-ry hover:text-black transition-all inline-flex items-center gap-2">
+<i class="fas fa-cart-plus"></i> Buy Realme P4 — ₹22,999
+</button>
+</div>
+<div class="flex gap-6 md:gap-10">
+<div><span class="font-heading text-3xl md:text-4xl font-bold text-ry counter" data-target="139">0</span><p class="text-rt text-xs mt-1">Phones Compared</p></div>
+<div><span class="font-heading text-3xl md:text-4xl font-bold text-ry counter" data-target="7">0</span><p class="text-rt text-xs mt-1">Loser Categories</p></div>
+<div><span class="font-heading text-3xl md:text-4xl font-bold text-ry">₹67K</span><p class="text-rt text-xs mt-1">Max Savings</p></div>
+</div>
+</div>
+<div class="order-1 lg:order-2 flex justify-center">
+<div class="relative">
+<div class="w-56 h-80 md:w-72 md:h-96 bg-gradient-to-b from-ry/20 to-transparent rounded-[2.5rem] border-2 border-ry/30 flex items-center justify-center glow-yellow-strong">
+<div class="text-center">
+<i class="fas fa-mobile-alt text-ry text-6xl md:text-8xl mb-4"></i>
+<p class="font-heading text-2xl md:text-3xl font-bold text-ry">P4 5G</p>
+<p class="text-rt text-xs">Realme</p>
+</div>
+</div>
+<div class="absolute -top-3 -right-3 bg-ry text-black text-xs font-bold px-3 py-1 rounded-full">#1 Value</div>
+<div class="absolute -bottom-3 -left-3 bg-red-600 text-white text-[10px] font-bold px-3 py-1 rounded-full">139 LOSERS</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SCROLLING BANNER -->
+<div class="bg-ry py-2 overflow-hidden">
+<div class="flex whitespace-nowrap marquee">
+<span class="text-black text-xs md:text-sm font-bold mx-8">⚡ 80W SUPERVOOC CHARGING</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">❄️ 9-LAYER VC LIQUID COOLING</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">📱 120Hz AMOLED DISPLAY</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">🚀 DIMENSITY 8300 ULTRA</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">🔋 5500mAh MEGA BATTERY</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">📸 50MP SONY IMX890</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">⚡ 80W SUPERVOOC CHARGING</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">❄️ 9-LAYER VC LIQUID COOLING</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">📱 120Hz AMOLED DISPLAY</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">🚀 DIMENSITY 8300 ULTRA</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">🔋 5500mAh MEGA BATTERY</span>
+<span class="text-black text-xs md:text-sm font-bold mx-8">📸 50MP SONY IMX890</span>
+</div>
+</div>
+
+<!-- PRODUCTS SECTION -->
+<section id="products" class="py-12 md:py-20">
+<div class="max-w-[1920px] mx-auto px-4 md:px-8">
+<div class="text-center mb-12">
+<h2 class="font-heading text-3xl md:text-5xl font-bold uppercase tracking-tight">The <span class="text-ry">Loser</span> Collections</h2>
+<p class="text-rt mt-3 text-sm md:text-base max-w-2xl mx-auto">139 phones priced over ₹25,000 that can't compete with the Realme P4 5G. Click any phone to see why Realme wins.</p>
+</div>
+<div id="productSections"></div>
+</div>
+</section>
+
+<!-- REALME WINS SECTION -->
+<section class="py-16 md:py-24 bg-rc stripe-bg relative">
+<div class="absolute inset-0 pointer-events-none"><div class="absolute top-0 right-0 w-96 h-96 bg-ry/5 rounded-full blur-3xl"></div></div>
+<div class="max-w-[1920px] mx-auto px-4 md:px-8 relative">
+<div class="text-center mb-12">
+<span class="text-ry text-xs font-semibold tracking-widest uppercase">Unbeatable Value</span>
+<h2 class="font-heading text-3xl md:text-5xl font-bold uppercase mt-2">Why <span class="text-ry">Realme P4 5G</span> Destroys All</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-black border border-rb rounded-xl p-6 card-hover"><div class="w-12 h-12 bg-ry/10 rounded-lg flex items-center justify-center mb-4"><i class="fas fa-bolt text-ry text-xl"></i></div><h3 class="font-heading text-xl font-bold mb-2">80W SUPERVOOC</h3><p class="text-rt text-sm">0 to 50% in just 19 minutes. Samsung still ships 25W chargers at ₹60K. Embarrassing.</p></div>
+<div class="bg-black border border-rb rounded-xl p-6 card-hover"><div class="w-12 h-12 bg-ry/10 rounded-lg flex items-center justify-center mb-4"><i class="fas fa-snowflake text-ry text-xl"></i></div><h3 class="font-heading text-xl font-bold mb-2">9-Layer VC Cooling</h3><p class="text-rt text-sm">Vapor chamber cooling that keeps temps 8°C lower than Pixel 8a and OnePlus 12R under load.</p></div>
+<div class="bg-black border border-rb rounded-xl p-6 card-hover"><div class="w-12 h-12 bg-ry/10 rounded-lg flex items-center justify-center mb-4"><i class="fas fa-microchip text-ry text-xl"></i></div><h3 class="font-heading text-xl font-bold mb-2">Dimensity 8300 Ultra</h3><p class="text-rt text-sm">AnTuTu 1.5M+ beats most ₹40K+ phones. Xiaomi and POCO can't match this at any price.</p></div>
+<div class="bg-black border border-rb rounded-xl p-6 card-hover"><div class="w-12 h-12 bg-ry/10 rounded-lg flex items-center justify-center mb-4"><i class="fas fa-tv text-ry text-xl"></i></div><h3 class="font-heading text-xl font-bold mb-2">120Hz AMOLED</h3><p class="text-rt text-sm">2000nit peak brightness, Pro-XDR display. Sony charges ₹65K for less. Nothing's glyph won't save you.</p></div>
+<div class="bg-black border border-rb rounded-xl p-6 card-hover"><div class="w-12 h-12 bg-ry/10 rounded-lg flex items-center justify-center mb-4"><i class="fas fa-battery-full text-ry text-xl"></i></div><h3 class="font-heading text-xl font-bold mb-2">5500mAh Battery</h3><p class="text-rt text-sm">2-day battery life. Oppo gives you 4500mAh at ₹37K. The math doesn't lie.</p></div>
+<div class="bg-black border border-rb rounded-xl p-6 card-hover"><div class="w-12 h-12 bg-ry/10 rounded-lg flex items-center justify-center mb-4"><i class="fas fa-tag text-ry text-xl"></i></div><h3 class="font-heading text-xl font-bold mb-2">Just ₹22,999</h3><p class="text-rt text-sm">Flagship specs at mid-range price. Every phone on this list charges more and delivers less.</p></div>
+</div>
+<div class="text-center mt-10">
+<button onclick="addRealmeToCart()" class="bg-ry text-black px-10 py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 transition-all pulse-glow inline-flex items-center gap-2">
+<i class="fas fa-crown"></i> Add Realme P4 5G to Cart — ₹22,999
+</button>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-rc border-t border-rb py-12">
+<div class="max-w-[1920px] mx-auto px-4 md:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<div><div class="flex items-center gap-2 mb-4"><div class="w-8 h-8 bg-ry rounded-lg flex items-center justify-center"><i class="fas fa-mobile-alt text-black"></i></div><span class="font-heading text-xl font-bold text-ry">MOBILE STORE</span></div><p class="text-rt text-sm">The ultimate Realme P4 5G flagship killer hub. Comparing 139 overpriced phones so you don't overpay.</p></div>
+<div><h4 class="font-bold text-sm mb-4 uppercase tracking-wider">Loser Collections</h4><ul class="space-y-2 text-rt text-sm" id="footerCats"></ul></div>
+<div><h4 class="font-bold text-sm mb-4 uppercase tracking-wider">Quick Links</h4><ul class="space-y-2 text-rt text-sm"><li><a href="#hero" class="hover:text-ry transition-colors">Home</a></li><li><a href="#products" class="hover:text-ry transition-colors">All Phones</a></li><li><a href="#" onclick="addRealmeToCart();return false" class="hover:text-ry transition-colors">Buy Realme P4</a></li><li><a href="#" class="hover:text-ry transition-colors">Support</a></li></ul></div>
+<div><h4 class="font-bold text-sm mb-4 uppercase tracking-wider">Contact</h4><ul class="space-y-2 text-rt text-sm"><li><i class="fas fa-envelope mr-2 text-ry"></i>support@mobilestore.in</li><li><i class="fas fa-phone mr-2 text-ry"></i>1800-XXX-XXXX</li><li><i class="fas fa-map-marker-alt mr-2 text-ry"></i>India</li></ul></div>
+</div>
+<div class="border-t border-rb pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-rt text-xs">&copy; 2025 Mobile Store. All rights reserved. Realme P4 5G – The Flagship Killer.</p>
+<div class="flex gap-4"><a href="#" class="text-rt hover:text-ry transition-colors"><i class="fab fa-instagram text-lg"></i></a><a href="#" class="text-rt hover:text-ry transition-colors"><i class="fab fa-youtube text-lg"></i></a><a href="#" class="text-rt hover:text-ry transition-colors"><i class="fab fa-twitter text-lg"></i></a></div>
+</div>
+</div>
+</footer>
+
+<!-- COMPARISON MODAL -->
+<div id="compareModal" class="fixed inset-0 z-[100] hidden">
+<div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeCompare()"></div>
+<div class="absolute inset-4 md:inset-10 lg:inset-20 bg-rc rounded-2xl border border-rb overflow-y-auto">
+<div id="compareContent"></div>
+</div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div id="cartOverlay" class="fixed inset-0 z-[90] hidden">
+<div class="absolute inset-0 bg-black/60" onclick="toggleCart()"></div>
+<div class="absolute top-0 right-0 h-full w-full max-w-md bg-rc border-l border-rb slide-in" id="cartSidebar">
+<div class="flex flex-col h-full">
+<div class="flex items-center justify-between p-6 border-b border-rb">
+<h3 class="font-heading text-xl font-bold">Your Cart</h3>
+<button onclick="toggleCart()" class="text-rt hover:text-white transition-colors"><i class="fas fa-times text-xl"></i></button>
+</div>
+<div class="flex-1 overflow-y-auto p-6" id="cartItems">
+<div class="text-center text-rt py-12" id="emptyCart">
+<i class="fas fa-shopping-cart text-4xl mb-4 opacity-30"></i>
+<p>Your cart is empty</p>
+<p class="text-xs mt-2">Add the Realme P4 5G to get started!</p>
+</div>
+</div>
+<div class="border-t border-rb p-6">
+<div class="flex justify-between items-center mb-4">
+<span class="text-rt">Subtotal</span>
+<span class="font-bold text-lg" id="cartTotal">₹0</span>
+</div>
+<button onclick="openCheckout()" id="checkoutBtn" class="w-full bg-ry text-black py-3 rounded-lg font-bold hover:bg-yellow-400 transition-colors disabled:opacity-30 disabled:cursor-not-allowed" disabled>
+Proceed to Checkout
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div id="checkoutModal" class="fixed inset-0 z-[110] hidden">
+<div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeCheckout()"></div>
+<div class="absolute inset-4 md:inset-10 lg:inset-y-10 lg:left-1/2 lg:-translate-x-1/2 lg:max-w-2xl lg:w-full bg-rc rounded-2xl border border-rb overflow-y-auto">
+<div id="checkoutContent"></div>
+</div>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 left-6 z-50 w-12 h-12 bg-ry text-black rounded-full shadow-lg flex items-center justify-center hover:bg-yellow-400 transition-all opacity-0 pointer-events-none">
+<i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+// ============ DATA ============
+const REALME_PRICE = 22999;
+const REALME_NAME = 'Realme P4 5G';
+
+const categories = [
+  {
+    id:'samsung', title:'Charging/Heat Losers', brand:'SAMSUNG', icon:'fa-bolt', emoji:'⚡',
+    tagline:'Slow Charge + Overheat', color:'#4285F4',
+    weakPoint:'Charging Speed', competitorSpec:'25W Max Charging', realmeSpec:'80W SUPERVOOC',
+    weakPoint2:'Thermal Management', competitorSpec2:'Overheats under load', realmeSpec2:'9-Layer VC Liquid Cooling',
+    phones:[
+      {name:'Samsung Galaxy S24 FE 5G',price:59999},{name:'Samsung Galaxy S23 FE 5G',price:39999},
+      {name:'Samsung Galaxy S21 FE 5G',price:32999},{name:'Samsung Galaxy S22 5G',price:34000},
+      {name:'Samsung Galaxy S20 Ultra 5G',price:35000},{name:'Samsung Galaxy A36 5G',price:32000},
+      {name:'Samsung Galaxy A56 5G',price:41999},{name:'Samsung Galaxy A55 5G',price:39999},
+      {name:'Samsung Galaxy A54 5G',price:35499},{name:'Samsung Galaxy A73 5G',price:41999},
+      {name:'Samsung Galaxy A53 5G',price:31000},{name:'Samsung Galaxy A35 5G',price:30999},
+      {name:'Samsung Galaxy A34 5G',price:28000},{name:'Samsung Galaxy A80',price:34000},
+      {name:'Samsung Galaxy A72',price:32000},{name:'Samsung Galaxy A52s 5G',price:30000},
+      {name:'Samsung Galaxy M55s 5G',price:29999},{name:'Samsung Galaxy M55 5G',price:28999},
+      {name:'Samsung Galaxy M54 5G',price:33000},{name:'Samsung Galaxy F54 5G',price:29999},
+      {name:'Samsung Galaxy F55 5G',price:29999},{name:'Samsung Galaxy M53 5G',price:27000},
+      {name:'Samsung Galaxy F62',price:25000},{name:'Samsung Galaxy C55 5G',price:30000},
+      {name:'Samsung Galaxy Quantum 5',price:45000},{name:'Samsung Galaxy Jump 3',price:30000},
+      {name:'Samsung Galaxy XCover 7',price:35200},{name:'Samsung Galaxy Folder 2',price:35000}
+    ]
+  },
+  {
+    id:'vivo', title:'Camera-Only Losers', brand:'VIVO & iQOO', icon:'fa-camera', emoji:'📷',
+    tagline:'Only Camera, Rest is Average', color:'#415FFF',
+    weakPoint:'Overall Performance', competitorSpec:'Mid-range processor', realmeSpec:'Dimensity 8300 Ultra',
+    weakPoint2:'Charging Speed', competitorSpec2:'44W max charging', realmeSpec2:'80W SUPERVOOC',
+    phones:[
+      {name:'Vivo V50 5G',price:35000},{name:'Vivo V40 Pro 5G',price:42999},
+      {name:'Vivo V40 5G',price:34999},{name:'Vivo V40 Lite 5G',price:30000},
+      {name:'Vivo V30 Pro 5G',price:38999},{name:'Vivo V30 5G',price:32999},
+      {name:'Vivo V30e 5G',price:28000},{name:'Vivo V29 Pro 5G',price:33000},
+      {name:'Vivo V29 5G',price:31000},{name:'Vivo V29e 5G',price:26000},
+      {name:'Vivo V27 Pro 5G',price:35000},{name:'Vivo V25 Pro 5G',price:32000},
+      {name:'Vivo V23 Pro 5G',price:34000},{name:'Vivo T5 Pro 5G',price:30225},
+      {name:'Vivo T3 Ultra 5G',price:31999},{name:'Vivo T3 Pro 5G',price:26000},
+      {name:'Vivo T2 Pro 5G',price:24999},{name:'Vivo X80 Lite 5G',price:38000},
+      {name:'Vivo X90 Lite 5G',price:35000},{name:'iQOO Neo 9 Pro 5G',price:34999},
+      {name:'iQOO Neo 7 Pro 5G',price:31000},{name:'iQOO Z9 Turbo 5G',price:32000},
+      {name:'iQOO Z7 Pro 5G',price:25000}
+    ]
+  },
+  {
+    id:'oppo', title:'Overpriced Losers', brand:'OPPO', icon:'fa-money-bill-wave', emoji:'💰',
+    tagline:'Pay More, Get Less', color:'#1BA784',
+    weakPoint:'Value for Money', competitorSpec:'₹37K+ for mid specs', realmeSpec:'₹23K for flagship specs',
+    weakPoint2:'Battery Capacity', competitorSpec2:'4500mAh typical', realmeSpec2:'5500mAh mega battery',
+    phones:[
+      {name:'Oppo Reno 13 Pro 5G',price:38000},{name:'Oppo Reno 13 5G',price:33000},
+      {name:'Oppo Reno 12 Pro 5G',price:36999},{name:'Oppo Reno 12 5G',price:32999},
+      {name:'Oppo Reno 11 Pro 5G',price:34999},{name:'Oppo Reno 11 5G',price:29999},
+      {name:'Oppo Reno 10 Pro Plus 5G',price:54999},{name:'Oppo Reno 10 5G',price:32000},
+      {name:'Oppo Reno 9 Pro 5G',price:34000},{name:'Oppo Reno 8T 5G',price:29999},
+      {name:'Oppo Reno 7 5G',price:28000},{name:'Oppo F33 Pro 5G',price:37999},
+      {name:'Oppo F27 Pro Plus 5G',price:29999},{name:'Oppo F25 Pro 5G',price:25999},
+      {name:'Oppo F23 5G',price:24999},{name:'Oppo K12 5G',price:31000},
+      {name:'Oppo K12x 5G',price:21000},{name:'Oppo K11 5G',price:28000},
+      {name:'Oppo Find X5 Lite',price:36000},{name:'Oppo Find X3 Neo',price:35000},
+      {name:'Oppo Find N2 Flip',price:89999}
+    ]
+  },
+  {
+    id:'google', title:'Heating Losers', brand:'GOOGLE & ONEPLUS', icon:'fa-fire', emoji:'🔥',
+    tagline:'Overheating + Thermal Throttling', color:'#EA4335',
+    weakPoint:'Thermal Throttling', competitorSpec:'Overheats, drops frames', realmeSpec:'Stays cool under pressure',
+    weakPoint2:'Charging Speed', competitorSpec2:'20-30W slow charging', realmeSpec2:'80W SUPERVOOC',
+    phones:[
+      {name:'Google Pixel 9a 5G',price:45000},{name:'Google Pixel 8a 5G',price:42999},
+      {name:'Google Pixel 7 5G',price:39000},{name:'Google Pixel 7a 5G',price:35000},
+      {name:'Google Pixel 6 5G',price:31000},{name:'Google Pixel 6a 5G',price:26000},
+      {name:'Google Pixel 5 5G',price:22000},{name:'OnePlus 15T 5G',price:45000},
+      {name:'OnePlus 12R 5G',price:39999},{name:'OnePlus 11R 5G',price:35000},
+      {name:'OnePlus 10T 5G',price:38000},{name:'OnePlus 10R 5G',price:32000},
+      {name:'OnePlus 9RT 5G',price:34000},{name:'OnePlus 9R 5G',price:33000},
+      {name:'OnePlus Nord 4 5G',price:32999},{name:'OnePlus Nord 3 5G',price:28999},
+      {name:'OnePlus Nord CE 6 5G',price:34999},{name:'OnePlus Nord CE 5 5G',price:29000},
+      {name:'OnePlus Nord CE 4 5G',price:24999},{name:'OnePlus Nord 2T 5G',price:28000}
+    ]
+  },
+  {
+    id:'xiaomi', title:'Software Losers', brand:'XIAOMI, REDMI & POCO', icon:'fa-bug', emoji:'🐛',
+    tagline:'Buggy Software + Bloatware', color:'#FF6900',
+    weakPoint:'Software Experience', competitorSpec:'MIUI/HyperOS bloatware + ads', realmeSpec:'Clean Realme UI 5.0',
+    weakPoint2:'Long-term Support', competitorSpec2:'2 years OS updates', realmeSpec2:'3 years OS + 4 years security',
+    phones:[
+      {name:'Xiaomi 14 Civi 5G',price:42999},{name:'Xiaomi 13T 5G',price:40000},
+      {name:'Xiaomi 12 Pro 5G',price:45000},{name:'Xiaomi 12 Lite 5G',price:30000},
+      {name:'Xiaomi 11T Pro 5G',price:33000},{name:'Xiaomi 11 Lite NE 5G',price:26000},
+      {name:'Xiaomi Mi 11X Pro 5G',price:34000},{name:'Redmi Note 15 Pro Plus 5G',price:35000},
+      {name:'Redmi Note 14 Pro Plus 5G',price:33000},{name:'Redmi Note 13 Pro Plus 5G',price:31999},
+      {name:'Redmi Note 12 Pro Plus 5G',price:27999},{name:'POCO F7 5G',price:32000},
+      {name:'POCO F6 5G',price:29999},{name:'POCO F6 Pro 5G',price:35000},
+      {name:'POCO X7 Pro 5G',price:29999},{name:'POCO X6 Pro 5G',price:26999},
+      {name:'POCO F5 Pro 5G',price:38000},{name:'POCO M6 Pro 5G',price:18000}
+    ]
+  },
+  {
+    id:'nothing', title:'Hype Losers', brand:'MOTOROLA & NOTHING', icon:'fa-bullhorn', emoji:'📢',
+    tagline:'All Hype, No Substance', color:'#8B5CF6',
+    weakPoint:'Real Performance', competitorSpec:'Style over substance', realmeSpec:'Substance AND style',
+    weakPoint2:'After-sales Support', competitorSpec2:'Poor service network', realmeSpec2:'500+ service centers',
+    phones:[
+      {name:'Motorola Edge 60 Fusion 5G',price:34999},{name:'Motorola Edge 50 Ultra 5G',price:54999},
+      {name:'Motorola Edge 50 Pro 5G',price:31999},{name:'Motorola Edge 50 Fusion 5G',price:27999},
+      {name:'Motorola Edge 40 5G',price:26999},{name:'Motorola Edge 30 Fusion 5G',price:34000},
+      {name:'Nothing Phone (3) 5G',price:45000},{name:'Nothing Phone (2) 5G',price:39999},
+      {name:'Nothing Phone (2a) Plus 5G',price:30999},{name:'Nothing Phone (2a) 5G',price:25999},
+      {name:'Nothing Phone (1) 5G',price:28000}
+    ]
+  },
+  {
+    id:'others', title:'Outdated Losers', brand:'SONY, HONOR & OTHERS', icon:'fa-clock', emoji:'🕰️',
+    tagline:'Outdated Tech + No Support', color:'#6B7280',
+    weakPoint:'Modern Features', competitorSpec:'Missing modern standards', realmeSpec:'Latest tech across the board',
+    weakPoint2:'Software Updates', competitorSpec2:'Abandoned after 1 year', realmeSpec2:'4 years of security updates',
+    phones:[
+      {name:'Sony Xperia 10 VI',price:40000},{name:'Sony Xperia 10 V',price:35000},
+      {name:'Sony Xperia 10 IV',price:32000},{name:'Sony Xperia 5 IV',price:65000},
+      {name:'Honor 200 5G',price:32999},{name:'Honor 200 Pro 5G',price:44999},
+      {name:'Honor 90 5G',price:29000},{name:'Honor 70 5G',price:27000},
+      {name:'Honor Magic 6 Lite 5G',price:31000},{name:'Honor Magic 5 Lite 5G',price:28000},
+      {name:'HMD Skyline 5G',price:35999},{name:'Nokia XR21 5G',price:38000},
+      {name:'Infinix Zero 40 5G',price:32000},{name:'Tecno Camon 30 Premier 5G',price:39999},
+      {name:'Lava Agni 3 5G',price:27999},{name:'Fairphone 5 5G',price:52000},
+      {name:'Asus Zenfone 10 5G',price:55000},{name:'Meizu 21 5G',price:45000}
+    ]
+  }
+];
+
+// ============ STATE ============
+let cart = [];
+let activeCategory = 'all';
+
+// ============ FORMAT ============
+function fmt(p){return '₹'+p.toLocaleString('en-IN')}
+
+// ============ INIT ============
+document.addEventListener('DOMContentLoaded',()=>{
+  renderCatNav();
+  renderMegaMenu();
+  renderProducts();
+  renderFooterCats();
+  initCounters();
+  initSearch();
+  initScrollEffects();
+});
+
+// ============ CATEGORY NAV ============
+function renderCatNav(){
+  const nav=document.getElementById('catNav');
+  categories.forEach(c=>{
+    const btn=document.createElement('button');
+    btn.className='cat-btn shrink-0 px-3 md:px-4 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all border border-rb text-rt hover:border-ry hover:text-ry';
+    btn.dataset.cat=c.id;
+    btn.innerHTML=`${c.emoji} ${c.brand} (${c.phones.length})`;
+    btn.onclick=()=>filterCategory(c.id);
+    nav.appendChild(btn);
+  });
+}
+
+function filterCategory(catId){
+  activeCategory=catId;
+  document.querySelectorAll('.cat-btn').forEach(b=>{
+    if(b.dataset.cat===catId){
+      b.className='cat-btn shrink-0 px-3 md:px-4 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all bg-ry text-black';
+    }else{
+      b.className='cat-btn shrink-0 px-3 md:px-4 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all border border-rb text-rt hover:border-ry hover:text-ry';
+    }
+  });
+  document.querySelectorAll('.product-section').forEach(s=>{
+    if(catId==='all'||s.dataset.cat===catId){
+      s.style.display='';
+    }else{
+      s.style.display='none';
+    }
+  });
+  const target=catId==='all'?'products':'section-'+catId;
+  document.getElementById(target)?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ============ MEGA MENU ============
+function renderMegaMenu(){
+  const cont=document.getElementById('megaMenuContent');
+  cont.innerHTML=categories.map(c=>`
+    <div class="bg-black rounded-xl p-4 border border-rb">
+      <div class="flex items-center gap-2 mb-3">
+        <i class="fas ${c.icon} text-lg" style="color:${c.color}"></i>
+        <h4 class="font-heading font-bold text-sm uppercase">${c.brand}</h4>
+      </div>
+      <p class="text-xs text-rt mb-3">${c.tagline}</p>
+      <div class="space-y-1 max-h-40 overflow-y-auto">
+        ${c.phones.slice(0,8).map(p=>`<div class="text-xs text-gray-400 hover:text-ry cursor-pointer transition-colors truncate" onclick="openCompareById('${c.id}',${c.phones.indexOf(p)})">${p.name} — ${fmt(p.price)}</div>`).join('')}
+        ${c.phones.length>8?`<div class="text-xs text-ry font-semibold cursor-pointer" onclick="filterCategory('${c.id}')">+${c.phones.length-8} more...</div>`:''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleMegaMenu(){
+  document.getElementById('megaMenu').classList.toggle('open');
+}
+
+// ============ PRODUCTS ============
+function renderProducts(){
+  const cont=document.getElementById('productSections');
+  cont.innerHTML=categories.map(c=>`
+    <div class="product-section mb-12 md:mb-20 fade-in" data-cat="${c.id}" id="section-${c.id}">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 md:mb-8 pb-4 border-b border-rb">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:${c.color}15">
+              <i class="fas ${c.icon} text-lg" style="color:${c.color}"></i>
+            </div>
+            <div>
+              <h3 class="font-heading text-2xl md:text-3xl font-bold uppercase">${c.title}</h3>
+              <p class="text-rt text-xs uppercase tracking-wider">${c.brand} — ${c.phones.length} phones</p>
+            </div>
+          </div>
+          <p class="text-sm text-rt mt-1"><span style="color:${c.color}" class="font-semibold">${c.tagline}</span></p>
+        </div>
+        <div class="text-sm text-rt">Avg. overpayment: <span class="text-ry font-bold">${fmt(Math.round(c.phones.reduce((a,p)=>a+p.price,0)/c.phones.length-REALME_PRICE))}</span></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="cards-${c.id}">
+        ${c.phones.map((p,i)=>renderCard(c,p,i)).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCard(cat,phone,idx){
+  const savings=phone.price-REALME_PRICE;
+  const pct=Math.round((savings/phone.price)*100);
+  return`
+  <div class="bg-rc border border-rb rounded-xl p-4 md:p-5 card-hover relative group" data-cat="${cat.id}" data-idx="${idx}">
+    <div class="flex items-start justify-between mb-3">
+      <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider" style="background:${cat.color}15;color:${cat.color}">${cat.tagline.split('+')[0].trim()}</span>
+      ${savings>0?`<span class="text-[10px] font-bold text-red-400 bg-red-400/10 px-2 py-0.5 rounded">${pct}% overpriced</span>`:''}
+    </div>
+    <h4 class="font-bold text-sm md:text-base mb-1 group-hover:text-ry transition-colors leading-tight">${phone.name}</h4>
+    <div class="flex items-baseline gap-2 mb-1">
+      <span class="font-heading text-xl md:text-2xl font-bold">${fmt(phone.price)}</span>
+    </div>
+    ${savings>0?`<p class="text-xs text-red-400 mb-3"><i class="fas fa-arrow-down mr-1"></i>You save ${fmt(savings)} with Realme P4</p>`:`<p class="text-xs text-rt mb-3">Still can't match Realme P4 specs</p>`}
+    <button onclick="openCompareById('${cat.id}',${idx})" class="w-full bg-ry/10 border border-ry/30 text-ry py-2 rounded-lg text-xs md:text-sm font-bold hover:bg-ry hover:text-black transition-all">
+      <i class="fas fa-exchange-alt mr-1"></i> Compare with Realme P4
+    </button>
+  </div>`;
+}
+
+// ============ COMPARISON MODAL ============
+function openCompareById(catId,idx){
+  const cat=categories.find(c=>c.id===catId);
+  const phone=cat.phones[idx];
+  openCompare(cat,phone);
+}
+
+function openCompare(cat,phone){
+  const savings=phone.price-REALME_PRICE;
+  const pct=savings>0?Math.round((savings/phone.price)*100):0;
+  const modal=document.getElementById('compareModal');
+  const content=document.getElementById('compareContent');
+  
+  const specs=[
+    {label:'Price',realme:fmt(REALME_PRICE),competitor:fmt(phone.price),winner:'realme'},
+    {label:'Charging',realme:'80W SUPERVOOC',competitor:cat.id==='samsung'?'25W Max':cat.id==='vivo'?'44W Max':cat.id==='oppo'?'67W Max':cat.id==='google'?'20-30W':'33-67W',winner:'realme'},
+    {label:'Cooling',realme:'9-Layer VC Liquid',competitor:cat.id==='google'?'Thermal Throttling':cat.id==='samsung'?'Basic Cooling':'Standard Cooling',winner:'realme'},
+    {label:'Processor',realme:'Dimensity 8300 Ultra',competitor:'Mid-Range Chip',winner:'realme'},
+    {label:'Battery',realme:'5500mAh',competitor:cat.id==='oppo'?'4500mAh':'5000mAh',winner:'realme'},
+    {label:'Display',realme:'120Hz AMOLED 2000nit',competitor:'90-120Hz Standard',winner:'realme'},
+    {label:'Software',realme:'Realme UI 5.0 (Clean)',competitor:cat.id==='xiaomi'?'MIUI/HyperOS (Bloatware)':'Brand UI',winner:'realme'},
+    {label:'Value Score',realme:'10/10',competitor:pct>50?'3/10':pct>30?'5/10':'6/10',winner:'realme'},
+  ];
+
+  content.innerHTML=`
+    <div class="compare-bar text-center py-3">
+      <span class="font-heading text-2xl md:text-3xl font-bold text-black uppercase tracking-wider">🏆 Realme Wins 🏆</span>
+    </div>
+    <div class="p-6 md:p-10">
+      <button onclick="closeCompare()" class="absolute top-4 right-4 md:top-6 md:right-6 text-rt hover:text-white text-2xl transition-colors"><i class="fas fa-times"></i></button>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <!-- Realme -->
+        <div class="bg-green-900/20 border-2 border-green-500/50 rounded-xl p-6 text-center">
+          <div class="w-16 h-16 bg-ry rounded-2xl flex items-center justify-center mx-auto mb-3">
+            <i class="fas fa-crown text-black text-2xl"></i>
+          </div>
+          <h3 class="font-heading text-2xl font-bold text-green-400 mb-1">${REALME_NAME}</h3>
+          <p class="font-heading text-3xl font-bold text-ry">${fmt(REALME_PRICE)}</p>
+          <span class="inline-block bg-green-500/20 text-green-400 text-xs font-bold px-3 py-1 rounded-full mt-2 uppercase">Winner</span>
+        </div>
+        <!-- Competitor -->
+        <div class="bg-red-900/20 border-2 border-red-500/30 rounded-xl p-6 text-center">
+          <div class="w-16 h-16 bg-red-600/20 rounded-2xl flex items-center justify-center mx-auto mb-3">
+            <i class="fas fa-thumbs-down text-red-400 text-2xl"></i>
+          </div>
+          <h3 class="font-heading text-2xl font-bold text-red-400 mb-1">${phone.name}</h3>
+          <p class="font-heading text-3xl font-bold">${fmt(phone.price)}</p>
+          <span class="inline-block bg-red-500/20 text-red-400 text-xs font-bold px-3 py-1 rounded-full mt-2 uppercase">${cat.tagline}</span>
+        </div>
+      </div>
+
+      ${savings>0?`<div class="bg-ry/10 border border-ry/30 rounded-xl p-4 mb-8 text-center">
+        <p class="text-ry font-bold text-lg">You'd waste <span class="font-heading text-3xl">${fmt(savings)}</span> on the ${phone.name.split(' ').slice(0,2).join(' ')}</p>
+        <p class="text-rt text-sm mt-1">That's ${pct}% more for worse specs!</p>
+      </div>`:''}
+
+      <h4 class="font-heading text-xl font-bold mb-4 uppercase">Spec-by-Spec Comparison</h4>
+      <div class="space-y-2 mb-8">
+        ${specs.map(s=>`
+          <div class="grid grid-cols-3 gap-2 items-center bg-black/50 rounded-lg px-4 py-3 border border-rb">
+            <div class="text-sm text-green-400 font-semibold flex items-center gap-2"><i class="fas fa-check-circle"></i>${s.realme}</div>
+            <div class="text-xs text-rt font-semibold text-center uppercase tracking-wider">${s.label}</div>
+            <div class="text-sm text-red-400 font-semibold text-right flex items-center justify-end gap-2">${s.competitor}<i class="fas fa-times-circle"></i></div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="bg-ry/5 border border-ry/20 rounded-xl p-6 mb-6">
+        <h4 class="font-heading text-lg font-bold text-ry mb-2">💡 The Bottom Line</h4>
+        <p class="text-sm text-gray-300">The <strong class="text-ry">${phone.name}</strong> costs <strong>${fmt(savings)}</strong> more than the Realme P4 5G, yet delivers ${cat.id==='samsung'?'slower charging and worse cooling':cat.id==='vivo'?'only a marginally better camera':cat.id==='oppo'?'significantly less value':cat.id==='google'?'worse thermal management and slower charging':cat.id==='xiaomi'?'a bloated software experience':cat.id==='nothing'?'nothing but marketing hype':'outdated technology and no support'}. The Realme P4 5G is the clear winner.</p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <button onclick="addRealmeToCart();closeCompare()" class="flex-1 bg-ry text-black py-3.5 rounded-lg font-bold hover:bg-yellow-400 transition-all flex items-center justify-center gap-2">
+          <i class="fas fa-cart-plus"></i> Add Realme P4 to Cart — ${fmt(REALME_PRICE)}
+        </button>
+        <button onclick="closeCompare()" class="flex-1 border border-rb text-rt py-3.5 rounded-lg font-bold hover:border-ry hover:text-ry transition-all">
+          Close
+        </button>
+      </div>
+    </div>
+  `;
+  modal.classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+
+function closeCompare(){
+  document.getElementById('compareModal').classList.add('hidden');
+  document.body.style.overflow='';
+}
+
+// ============ SEARCH ============
+function initSearch(){
+  const input=document.getElementById('searchInput');
+  const dropdown=document.getElementById('searchDropdown');
+  
+  input.addEventListener('input',()=>{
+    const q=input.value.trim().toLowerCase();
+    if(q.length<2){dropdown.classList.add('hidden');return;}
+    
+    let results=[];
+    categories.forEach(c=>{
+      c.phones.forEach((p,i)=>{
+        if(p.name.toLowerCase().includes(q)){
+          results.push({cat:c,phone:p,idx:i});
+        }
+      });
+    });
+    
+    if(results.length===0){
+      dropdown.innerHTML='<div class="p-4 text-rt text-sm text-center">No phones found matching "'+input.value+'"</div>';
+    }else{
+      dropdown.innerHTML=results.slice(0,15).map(r=>`
+        <div class="px-4 py-3 hover:bg-rb cursor-pointer flex items-center justify-between transition-colors border-b border-rb/50 last:border-0" onclick="openCompareById('${r.cat.id}',${r.idx});document.getElementById('searchDropdown').classList.add('hidden');">
+          <div>
+            <span class="text-sm font-semibold">${r.phone.name}</span>
+            <span class="text-xs text-rt ml-2">${r.cat.brand}</span>
+          </div>
+          <span class="text-sm font-bold text-ry">${fmt(r.phone.price)}</span>
+        </div>
+      `).join('')+(results.length>15?`<div class="p-3 text-center text-rt text-xs">...and ${results.length-15} more results</div>`:'');
+    }
+    dropdown.classList.remove('hidden');
+  });
+  
+  input.addEventListener('blur',()=>{setTimeout(()=>dropdown.classList.add('hidden'),200)});
+  input.addEventListener('focus',()=>{if(input.value.trim().length>=2)dropdown.classList.remove('hidden')});
+}
+
+function performSearch(){document.getElementById('searchInput').dispatchEvent(new Event('input'))}
+function toggleMobileSearch(){document.getElementById('mobileSearch').classList.toggle('hidden')}
+function performMobileSearch(){
+  const q=document.getElementById('mobileSearchInput').value.trim().toLowerCase();
+  if(q.length<2)return;
+  document.getElementById('searchInput').value=q;
+  document.getElementById('searchInput').dispatchEvent(new Event('input'));
+  toggleMobileSearch();
+}
+
+// ============ CART ============
+function addRealmeToCart(){
+  const existing=cart.find(i=>i.name===REALME_NAME);
+  if(existing){existing.qty++;}
+  else{cart.push({name:REALME_NAME,price:REALME_PRICE,qty:1});}
+  updateCartUI();
+  showToast(`${REALME_NAME} added to cart!`,'success');
+}
+
+function removeFromCart(idx){
+  cart.splice(idx,1);
+  updateCartUI();
+}
+
+function updateQty(idx,delta){
+  cart[idx].qty+=delta;
+  if(cart[idx].qty<=0)cart.splice(idx,1);
+  updateCartUI();
+}
+
+function updateCartUI(){
+  const badge=document.getElementById('cartBadge');
+  const itemsEl=document.getElementById('cartItems');
+  const totalEl=document.getElementById('cartTotal');
+  const checkoutBtn=document.getElementById('checkoutBtn');
+  const emptyCart=document.getElementById('emptyCart');
+  
+  const totalQty=cart.reduce((a,i)=>a+i.qty,0);
+  const totalPrice=cart.reduce((a,i)=>a+i.price*i.qty,0);
+  
+  if(totalQty>0){
+    badge.classList.remove('hidden');
+    badge.textContent=totalQty;
+    checkoutBtn.disabled=false;
+    
+    itemsEl.innerHTML=cart.map((item,i)=>`
+      <div class="flex gap-4 items-center py-4 ${i>0?'border-t border-rb':''}">
+        <div class="w-14 h-14 bg-ry/10 rounded-lg flex items-center justify-center shrink-0">
+          <i class="fas fa-mobile-alt text-ry text-xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="font-bold text-sm truncate">${item.name}</h4>
+          <p class="text-ry font-bold text-sm">${fmt(item.price)}</p>
+          <div class="flex items-center gap-2 mt-1">
+            <button onclick="updateQty(${i},-1)" class="w-6 h-6 rounded bg-rb text-rt hover:text-white text-xs flex items-center justify-center">−</button>
+            <span class="text-sm font-semibold w-6 text-center">${item.qty}</span>
+            <button onclick="updateQty(${i},1)" class="w-6 h-6 rounded bg-rb text-rt hover:text-white text-xs flex items-center justify-center">+</button>
+          </div>
+        </div>
+        <button onclick="removeFromCart(${i})" class="text-rt hover:text-red-400 transition-colors"><i class="fas fa-trash-alt"></i></button>
+      </div>
+    `).join('');
+  }else{
+    badge.classList.add('hidden');
+    checkoutBtn.disabled=true;
+    itemsEl.innerHTML=`<div class="text-center text-rt py-12"><i class="fas fa-shopping-cart text-4xl mb-4 opacity-30"></i><p>Your cart is empty</p><p class="text-xs mt-2">Add the Realme P4 5G to get started!</p></div>`;
+  }
+  totalEl.textContent=fmt(totalPrice);
+}
+
+function toggleCart(){
+  const overlay=document.getElementById('cartOverlay');
+  const sidebar=document.getElementById('cartSidebar');
+  if(overlay.classList.contains('hidden')){
+    overlay.classList.remove('hidden');
+    setTimeout(()=>sidebar.classList.add('open'),10);
+    document.body.style.overflow='hidden';
+  }else{
+    sidebar.classList.remove('open');
+    setTimeout(()=>{overlay.classList.add('hidden');document.body.style.overflow=''},300);
+  }
+}
+
+// ============ CHECKOUT ============
+function openCheckout(){
+  if(cart.length===0)return;
+  toggleCart();
+  const modal=document.getElementById('checkoutModal');
+  const content=document.getElementById('checkoutContent');
+  const total=cart.reduce((a,i)=>a+i.price*i.qty,0);
+  
+  content.innerHTML=`
+    <div class="p-6 md:p-10">
+      <button onclick="closeCheckout()" class="absolute top-4 right-4 md:top-6 md:right-6 text-rt hover:text-white text-2xl transition-colors"><i class="fas fa-times"></i></button>
+      
+      <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase mb-8">Checkout</h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        <div class="lg:col-span-3 space-y-6">
+          <div>
+            <h3 class="font-bold text-sm uppercase tracking-wider text-rt mb-3">Shipping Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div><label class="text-xs text-rt block mb-1">Full Name</label><input type="text" class="w-full bg-black border border-rb rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-ry" placeholder="John Doe"></div>
+              <div><label class="text-xs text-rt block mb-1">Phone Number</label><input type="tel" class="w-full bg-black border border-rb rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-ry" placeholder="+91 98765 43210"></div>
+              <div class="md:col-span-2"><label class="text-xs text-rt block mb-1">Email Address</label><input type="email" class="w-full bg-black border border-rb rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-ry" placeholder="john@example.com"></div>
+              <div class="md:col-span-2"><label class="text-xs text-rt block mb-1">Address Line 1</label><input type="text" class="w-full bg-black border border-rb rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-ry" placeholder="House/Flat No., Building Name"></div>
+              <div class="md:col-span-2"><label class="text-xs text-rt block mb-1">Address Line 2</label><input type="text" class="w-full bg-black border border-rb rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-ry" placeholder="Street, Area, Colony"></div>
+              <div><label class="text-xs text-rt block mb-1">City</label><input type="text" class="w-full bg-black border border-rb rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-ry" placeholder="Mumbai"></div>
+              <div><label class="text-xs text-rt block mb-1">PIN Code</label><input type="text" class="w-full bg-black border border-rb rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-ry" placeholder="400001"></div>
+              <div><label class="text-xs text-rt block mb-1">State</label>
+                <select class="w-full bg-black border border-rb rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-ry text-rt">
+                  <option>Select State</option><option>Maharashtra</option><option>Karnataka</option><option>Tamil Nadu</option><option>Delhi</option><option>Gujarat</option><option>Rajasthan</option><option>Uttar Pradesh</option><option>West Bengal</option><option>Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="font-bold text-sm uppercase tracking-wider text-rt mb-3">Payment Method</h3>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 bg-black border border-rb rounded-lg px-4 py-3 cursor-pointer hover:border-ry transition-colors">
+                <input type="radio" name="payment" value="upi" checked class="accent-[#FFC800]"><i class="fas fa-qrcode text-ry"></i><span class="text-sm">UPI (GPay / PhonePe / Paytm)</span>
+              </label>
+              <label class="flex items-center gap-3 bg-black border border-rb rounded-lg px-4 py-3 cursor-pointer hover:border-ry transition-colors">
+                <input type="radio" name="payment" value="card" class="accent-[#FFC800]"><i class="fas fa-credit-card text-ry"></i><span class="text-sm">Credit / Debit Card</span>
+              </label>
+              <label class="flex items-center gap-3 bg-black border border-rb rounded-lg px-4 py-3 cursor-pointer hover:border-ry transition-colors">
+                <input type="radio" name="payment" value="emi" class="accent-[#FFC800]"><i class="fas fa-calendar-alt text-ry"></i><span class="text-sm">EMI (No Cost EMI Available)</span>
+              </label>
+              <label class="flex items-center gap-3 bg-black border border-rb rounded-lg px-4 py-3 cursor-pointer hover:border-ry transition-colors">
+                <input type="radio" name="payment" value="cod" class="accent-[#FFC800]"><i class="fas fa-money-bill-wave text-ry"></i><span class="text-sm">Cash on Delivery</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="lg:col-span-2">
+          <div class="bg-black border border-rb rounded-xl p-5 sticky top-4">
+            <h3 class="font-bold text-sm uppercase tracking-wider text-rt mb-4">Order Summary</h3>
+            ${cart.map(item=>`
+              <div class="flex justify-between items-center py-2 text-sm">
+                <span class="text-gray-300">${item.name} × ${item.qty}</span>
+                <span class="font-semibold">${fmt(item.price*item.qty)}</span>
+              </div>
+            `).join('')}
+            <div class="border-t border-rb my-3"></div>
+            <div class="flex justify-between items-center py-1 text-sm text-rt"><span>Shipping</span><span class="text-green-400 font-semibold">FREE</span></div>
+            <div class="flex justify-between items-center py-1 text-sm text-rt"><span>Tax (GST 18%)</span><span>${fmt(Math.round(total*0.18))}</span></div>
+            <div class="border-t border-rb my-3"></div>
+            <div class="flex justify-between items-center py-1">
+              <span class="font-bold text-lg">Total</span>
+              <span class="font-heading font-bold text-2xl text-ry">${fmt(Math.round(total*1.18))}</span>
+            </div>
+            <p class="text-xs text-rt mt-3 mb-4">Inclusive of all taxes. EMI starts at ₹${Math.round(total*1.18/12)}/month.</p>
+            <button onclick="placeOrder()" class="w-full bg-ry text-black py-3.5 rounded-lg font-bold hover:bg-yellow-400 transition-all flex items-center justify-center gap-2">
+              <i class="fas fa-lock"></i> Place Order
+            </button>
+            <p class="text-[10px] text-rt text-center mt-3"><i class="fas fa-shield-alt mr-1"></i>Secure checkout. 100% buyer protection.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  modal.classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+
+function closeCheckout(){
+  document.getElementById('checkoutModal').classList.add('hidden');
+  document.body.style.overflow='';
+}
+
+function placeOrder(){
+  const content=document.getElementById('checkoutContent');
+  content.innerHTML=`
+    <div class="p-10 md:p-20 text-center">
+      <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+        <i class="fas fa-check-circle text-green-400 text-4xl"></i>
+      </div>
+      <h2 class="font-heading text-3xl md:text-4xl font-bold mb-3">Order Placed! 🎉</h2>
+      <p class="text-rt mb-2">Your Realme P4 5G is on its way!</p>
+      <p class="text-sm text-gray-400 mb-8">Order #RM${Date.now().toString().slice(-8)} • Estimated delivery: 3-5 business days</p>
+      <div class="bg-ry/10 border border-ry/30 rounded-xl p-6 max-w-md mx-auto mb-8">
+        <p class="text-ry font-bold text-lg mb-1">You made the right choice!</p>
+        <p class="text-rt text-sm">The Realme P4 5G beats all 139 overpriced competitors. Welcome to the flagship killer club.</p>
+      </div>
+      <button onclick="closeCheckout();cart=[];updateCartUI()" class="bg-ry text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-400 transition-all">
+        Continue Shopping
+      </button>
+    </div>
+  `;
+  showToast('Order placed successfully! 🎉','success');
+}
+
+// ============ MOBILE MENU ============
+function toggleMobileMenu(){
+  const menu=document.getElementById('mobileMenu');
+  if(menu){
+    menu.classList.toggle('hidden');
+  }else{
+    // Create mobile menu
+    const m=document.createElement('div');
+    m.id='mobileMenu';
+    m.className='fixed inset-0 z-[60] bg-black/95 pt-24 px-6 overflow-y-auto';
+    m.innerHTML=`
+      <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-white text-2xl"><i class="fas fa-times"></i></button>
+      <div class="space-y-4">
+        ${categories.map(c=>`
+          <button onclick="filterCategory('${c.id}');toggleMobileMenu()" class="w-full text-left flex items-center gap-3 p-4 bg-rc border border-rb rounded-xl hover:border-ry transition-colors">
+            <i class="fas ${c.icon}" style="color:${c.color}"></i>
+            <div>
+              <div class="font-bold text-sm">${c.brand}</div>
+              <div class="text-rt text-xs">${c.tagline} • ${c.phones.length} phones</div>
+            </div>
+          </button>
+        `).join('')}
+        <button onclick="addRealmeToCart();toggleMobileMenu()" class="w-full bg-ry text-black p-4 rounded-xl font-bold text-center">
+          <i class="fas fa-crown mr-2"></i>Buy Realme P4 5G — ${fmt(REALME_PRICE)}
+        </button>
+      </div>
+    `;
+    document.body.appendChild(m);
+  }
+}
+
+// ============ FOOTER CATEGORIES ============
+function renderFooterCats(){
+  document.getElementById('footerCats').innerHTML=categories.map(c=>
+    `<li><a href="#" onclick="filterCategory('${c.id}');return false" class="hover:text-ry transition-colors"><i class="fas ${c.icon} mr-1" style="color:${c.color}"></i>${c.brand} (${c.phones.length})</a></li>`
+  ).join('');
+}
+
+// ============ TOAST ============
+function showToast(msg,type='success'){
+  const t=document.createElement('div');
+  t.className=`toast-enter px-6 py-3 rounded-lg text-sm font-semibold shadow-2xl flex items-center gap-2 ${type==='success'?'bg-ry text-black':'bg-red-600 text-white'}`;
+  t.innerHTML=`<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-circle'}"></i>${msg}`;
+  document.getElementById('toastContainer').appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateY(20px)';t.style.transition='all .3s';setTimeout(()=>t.remove(),300)},2500);
+}
+
+// ============ COUNTER ANIMATION ============
+function initCounters(){
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el=entry.target;
+        const target=parseInt(el.dataset.target);
+        if(isNaN(target))return;
+        let current=0;
+        const increment=target/40;
+        const timer=setInterval(()=>{
+          current+=increment;
+          if(current>=target){current=target;clearInterval(timer);}
+          el.textContent=Math.floor(current);
+        },30);
+        observer.unobserve(el);
+      }
+    });
+  },{threshold:0.5});
+  document.querySelectorAll('.counter').forEach(el=>observer.observe(el));
+}
+
+// ============ SCROLL EFFECTS ============
+function initScrollEffects(){
+  // Fade-in sections
+  const fadeObserver=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>fadeObserver.observe(el));
+  
+  // Back to top
+  window.addEventListener('scroll',()=>{
+    const btn=document.getElementById('backToTop');
+    if(window.scrollY>600){btn.style.opacity='1';btn.style.pointerEvents='auto';}
+    else{btn.style.opacity='0';btn.style.pointerEvents='none';}
+  });
+  
+  // Header shrink
+  let lastScroll=0;
+  window.addEventListener('scroll',()=>{
+    const header=document.querySelector('header');
+    if(window.scrollY>100)header.style.borderBottomColor='#333';
+    else header.style.borderBottomColor='';
+    lastScroll=window.scrollY;
+  });
+}
+
+// ============ KEYBOARD SHORTCUT ============
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeCompare();
+    closeCheckout();
+    const cartOverlay=document.getElementById('cartOverlay');
+    if(!cartOverlay.classList.contains('hidden'))toggleCart();
+  }
+});
+</script>
+</body>
+</html>
